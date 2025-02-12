@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>75th Diamond Celebration - IHMS</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>75th Diamond Celebration - Immaculate Heart of Mary Seminary</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#schedule">Event Schedule</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to the 75th Diamond Celebration</h2>
+        <p>Join us as we commemorate 75 years of excellence and faith formation at IHMS.</p>
+        <p><strong>Date:</strong> [19-20] | <strong>Location:</strong> Immaculate Heart of Mary Seminary</p>
+    </section>
+
+    <section id="registration">
+        <h2>IHMS Alumni Registration</h2>
+        <form id="registrationForm">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" required><br><br>
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+
+            <label for="affiliation">Affiliation with IHMS:</label>
+            <input type="text" id="affiliation" name="affiliation" required><br><br>
+
+            <label for="type">Registration Type:</label>
+            <select id="type" name="type" required>
+                <option value="alumni">Alumni</option>
+                <option value="guest">Guest</option>
+                <option value="sponsor">Sponsor</option>
+            </select><br><br>
+
+            <button type="submit">Register</button>
+        </form>
+    </section>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent page reload
+
+            let formData = new FormData(this);
+            let scriptURL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE"; // Replace with your actual Google Apps Script Web App URL
+
+            let urlParams = new URLSearchParams(formData).toString();
+
+            fetch(scriptURL + "?" + urlParams, { method: "POST" })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "Success") {
+                        alert("Registration Successful!");
+                        document.getElementById("registrationForm").reset();
+                    } else {
+                        alert("Something went wrong. Please try again.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        });
+    </script>
+
+    <section id="schedule">
+        <h2>Event Schedule</h2>
+        <p>Stay tuned for the detailed schedule of activities during the celebration.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>For inquiries, please contact the event organizers.</p>
+        <form id="contactForm">
+            <label for="message">Your Message:</label>
+            <textarea id="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Immaculate Heart of Mary Seminary | Follow us on social media</p>
+    </footer>
+
+</body>
+</html>
